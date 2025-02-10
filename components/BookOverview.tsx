@@ -47,7 +47,7 @@ const BookOverview = ({
 
         <Button className="book-overview_btn">
           <Image src="/icons/book.svg" alt="book" width={20} height={20} />
-          <p className="font-bebas-neue tex-xl text-dark-100">Borrow Book</p>
+          <p className="font-bebas-neue tex-xl text-dark-100">Borrow </p>
         </Button>
       </div>
       <div className="relative flex flex-1 justify-center">
