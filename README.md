@@ -6,9 +6,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 1. create folder  in  App folder  to (auth)
 2. add a new layout.tsx to  only work on the (auth ) folder
 3.  2  more  folders  with  page.tsx  in the  Which  will be  Sign-in and  Sign-up
-4.  add  dependencies from npm install shadcn@latest add from,  npm install @hookform/resolvers, npm install react-hook-form
+4.  add  dependencies from npm install shadcn@latest add form,and input,  npm install @hookform/resolvers, npm install react-hook-form
 5.  in the  lib folder  add a  validations.ts file
 6.  in components folder create a AuthForm.tsx file
+7. make  sure you  have a  constants folder with a  index.ts for the  FieldNames and Field Types
 
 
 ## Deploy on Vercel

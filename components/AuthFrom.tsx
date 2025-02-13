@@ -76,7 +76,7 @@ const AuthFrom = <T extends FieldValues>({
                   </FormLabel>
                   <FormControl>
                     {field.name === 'universityCard' ? (
-                      <ImageUpload />
+                      <ImageUpload onFileChange={field.onChange} />
                     ) : (
                       <Input
                         required
@@ -95,7 +95,7 @@ const AuthFrom = <T extends FieldValues>({
             />
           ))}
 
-          <Button type="submit" className="form-btn">
+          <Button type="submit" className="form-btn !text-white">
             {isSignIn ? 'Sign In' : 'Sign Up'}
           </Button>
         </form>
@@ -105,7 +105,7 @@ const AuthFrom = <T extends FieldValues>({
         {isSignIn ? 'New to BookWise?' : 'Already have an account?'}
         <Link
           href={isSignIn ? 'sign-up' : '/sign-in'}
-          className="font-bold text-primary"
+          className="font-bold text-light-300"
         >
           {isSignIn ? ' Create an account' : ' Sign in '}
         </Link>
