@@ -1,6 +1,5 @@
 import ImageKit from 'imagekit';
 import config from '@/lib/config';
-console.log('Config:', config);
 
 import { NextResponse } from 'next/server';
 
