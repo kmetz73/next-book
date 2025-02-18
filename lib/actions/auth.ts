@@ -1,14 +1,15 @@
 'use server';
 
-import { signIn } from '@/auth';
+import { eq } from 'drizzle-orm';
 import { db } from '@/database/drizzle';
 import { users } from '@/database/schema';
-import { Ratelimit } from '@upstash/ratelimit';
 import { hash } from 'bcryptjs';
-import { eq } from 'drizzle-orm';
+import { signIn } from '@/auth';
 import { headers } from 'next/headers';
-import ratelimit from '../ratelimit';
+import ratelimit from '@/lib/ratelimit';
 import { redirect } from 'next/navigation';
+
+import config from '@/lib/config';
 
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, 'email' | 'password'>
@@ -27,26 +28,25 @@ export const signInWithCredentials = async (
       redirect: false,
     });
 
-    return { success: true };
-
     if (result?.error) {
       return { success: false, error: result.error };
     }
+
+    return { success: true };
   } catch (error) {
     console.log(error, 'Signin error');
-    return { success: false, message: 'Signin error' };
+    return { success: false, error: 'Signin error' };
   }
 };
 
 export const signUp = async (params: AuthCredentials) => {
-  const { email, password, fullName, universityId, universityCard } = params;
+  const { fullName, email, universityId, password, universityCard } = params;
 
   const ip = (await headers()).get('x-forwarded-for') || '127.0.0.1';
   const { success } = await ratelimit.limit(ip);
 
   if (!success) return redirect('/too-fast');
 
-  //  check if user already exists
   const existingUser = await db
     .select()
     .from(users)
@@ -54,7 +54,7 @@ export const signUp = async (params: AuthCredentials) => {
     .limit(1);
 
   if (existingUser.length > 0) {
-    return { success: false, message: 'User already exists' };
+    return { success: false, error: 'User already exists' };
   }
 
   const hashedPassword = await hash(password, 10);
@@ -73,6 +73,6 @@ export const signUp = async (params: AuthCredentials) => {
     return { success: true };
   } catch (error) {
     console.log(error, 'Signup error');
-    return { success: false, message: 'Signup error' };
+    return { success: false, error: 'Signup error' };
   }
 };
