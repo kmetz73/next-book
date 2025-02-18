@@ -1,5 +1,6 @@
 'use client';
 
+import { signOut } from '@/auth';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 import { cn, getInitials } from '@/lib/utils';
@@ -7,6 +8,8 @@ import { Session } from 'next-auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Button } from './ui/button';
+import SignOut from './SignOut';
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
@@ -41,6 +44,9 @@ const Header = ({ session }: { session: Session }) => {
               </AvatarFallback>
             </Avatar>
           </Link>
+        </li>
+        <li>
+          <SignOut />
         </li>
       </ul>
     </header>
