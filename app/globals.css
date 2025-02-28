@@ -332,3 +332,14 @@
     @apply mt-2 text-3xl font-semibold text-white xs:text-5xl;
   }
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
