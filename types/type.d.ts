@@ -1,4 +1,5 @@
 interface Book {
+  userId: string;
   id: string;
   title: string;
   author: string;
