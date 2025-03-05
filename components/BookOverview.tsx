@@ -51,9 +51,9 @@ const BookOverview = ({
             alt="book"
             width={20}
             height={20}
-            className="text-light-300"
+            className="bg-white"
           />
-          <p className="font-bebas-neue tex-xl text-dark-100">Borrow </p>
+          <p className="font-bebas-neue tex-xl text-light-400">Borrow </p>
         </Button>
       </div>
       <div className="relative flex flex-1 justify-center">
