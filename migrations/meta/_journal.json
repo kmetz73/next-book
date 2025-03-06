@@ -15,6 +15,13 @@
       "when": 1741107098369,
       "tag": "0001_woozy_masked_marvel",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741281941213,
+      "tag": "0002_clean_lady_mastermind",
+      "breakpoints": true
     }
   ]
 }
