@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm';
 import dayjs from 'dayjs';
 
 export const borrowBook = async (params: BorrowBookParams) => {
-  const { bookId, userId } = params;
+  const { userId, bookId } = params;
 
   try {
     const book = await db
@@ -18,11 +18,11 @@ export const borrowBook = async (params: BorrowBookParams) => {
     if (!book.length || book[0].availableCopies <= 0) {
       return {
         success: false,
-        error: 'Book not available or out of stock',
+        error: 'Book is not available for borrowing',
       };
     }
 
-    const dueDate = dayjs().add(7, 'days').toDate().toDateString;
+    const dueDate = dayjs().add(7, 'day').toDate().toDateString();
 
     const record = await db.insert(borrowRecords).values({
       userId,
@@ -31,21 +31,21 @@ export const borrowBook = async (params: BorrowBookParams) => {
       status: 'BORROWED',
     });
 
-    return {
-      success: true,
-      data: JSON.parse(JSON.stringify(record)),
-    };
-
     await db
       .update(books)
       .set({ availableCopies: book[0].availableCopies - 1 })
       .where(eq(books.id, bookId));
+
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(record)),
+    };
   } catch (error) {
     console.log(error);
 
     return {
       success: false,
-      message: 'Error occurred borrowing book',
+      error: 'An error occurred while borrowing the book',
     };
   }
 };
